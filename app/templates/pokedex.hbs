@@ -4,17 +4,15 @@
 <button {{action "descending" }}>DescendingSORTPokemon</button>
 <button {{action "Nonsort" }}>Pokemon</button>
 <br><br>
-{{drop-down}}
-<br><br>
 {{input type="text" value=name}}
   <button {{action "searchByName" }}>Search</button>
 <br>  
 <br><br>
 {{#each modelDuplicate2 as |model|}} 
-  <div class= "pokemon-box">
+  <div class= "pokemon-box" data-test-title="pokemon-box">
     <img src={{model.avatar}} alt={{model.name}}>
     <h3>{{model.name}}</h3>
-    {{#link-to "details" model.name}}<button >View</button>{{/link-to}}   
+    {{#link-to "details" model.api_id}}<button >View</button>{{/link-to}}   
   </div>   
 {{/each}}
   

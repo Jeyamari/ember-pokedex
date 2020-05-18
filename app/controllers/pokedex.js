@@ -1,6 +1,9 @@
 import Controller from '@ember/controller';
 import {computed} from '@ember/object';
+import {inject as service} from '@ember/service';
+import { later } from '@ember/runloop';
 export default Controller.extend({
+    loading:service(),
     queryParams:['order'],
     searchName:null,
     searchArray:null,
@@ -27,11 +30,13 @@ export default Controller.extend({
         {
             return this.descending(this.model.slice());
         }
+       return  this.model.slice();
 
-        return  this.model.slice();
+        
     }),
     ascending: function(asc)
     {
+        console.log(this.loading);
          return asc.sort(function(obj1, obj2){
             let name1=obj1.name.toLowerCase();
             let name2=obj2.name.toLowerCase();
@@ -75,6 +80,15 @@ export default Controller.extend({
             this.set('order',null);
             this.set('searchName',null);
         },
+        reload() {
+            console.log("Started Refresh");
+            this.send('reloadDetails');
+        },
+        save(model) {
+            console.log("isLoading..");
+            return this.loading.run(() => model.save());
+
+        }
        
     },   
 });

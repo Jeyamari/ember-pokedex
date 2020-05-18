@@ -1,4 +1,6 @@
-export default function(/* server */) {
+export default function() {
+  //server.create('list');
+  //server.createList('list',10 );
 
   /*
     Seed your development database using your factories.

@@ -1,8 +1,11 @@
 import Controller from '@ember/controller';
 import {computed} from '@ember/object';
-export default Controller.extend({    
+import { inject as service } from '@ember/service';
+export default Controller.extend({   
+    loading:service(),
     heightWithUnits:computed('model.height',function()
     {
+        console.log(this.loading);
         let heightInDecimeter=this.model.height;
         let heightInMeter=heightInDecimeter/10;
         if(heightInMeter==1)
@@ -27,6 +30,7 @@ export default Controller.extend({
     }),
     toggle:function()
     {
+        console.log(this.loading.isLoading);
         this.set('props',this.model.props);   
         this.toggleProperty('isShowingResult'); 
         
